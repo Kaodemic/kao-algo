@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 module.exports = {
     // The bail config option can be used here to have Jest stop running tests after
     // the first failure.
@@ -25,4 +26,4 @@ module.exports = {
     // It is reflected in properties such as location.href.
     // @see: https://github.com/facebook/jest/issues/6769
     testURL: 'http://localhost/',
-}
+};

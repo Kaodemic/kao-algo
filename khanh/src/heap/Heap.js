@@ -1,22 +1,23 @@
-import Comparator from '../../utils/comparator/Comparator'
-
-
+import Comparator from '../utils/comparator/Comparator'
 
 export default class Heap {
     LEFT = 1;
+
     MID = 2;
+
     RIGHT = 3;
 
-    _NODE = 3;
+    NODE = 3;
+
     constructor(comparatorFunction) {
-        if (new.target == Heap) {
+        if (new.target === Heap) {
             throw new TypeError('Cannot contructor Heap instance directly')
         }
 
         this.heapContainer = [];
         this.compare = new Comparator(comparatorFunction);
-
     }
+
     /**
      * @function getHeapLength
      */
@@ -25,20 +26,20 @@ export default class Heap {
     }
 
     getLeftChildIndex(parentIndex) {
-        return (this._NODE * parentIndex) + this.LEFT
+        return (this.NODE * parentIndex) + this.LEFT
     }
 
 
     getMidChildIndex(parentIndex) {
-        return (this._NODE * parentIndex) + this.MID
+        return (this.NODE * parentIndex) + this.MID
     }
 
     getRightChildIndex(parentIndex) {
-        return (this._NODE * parentIndex) + this.RIGHT
+        return (this.NODE * parentIndex) + this.RIGHT
     }
 
     getParentIndex(childIndex) {
-        return Math.floor(childIndex - 1) / _NODE
+        return Math.floor(childIndex - 1) / this.NODE
     }
 
     hasParent(childIndex) {
@@ -95,14 +96,15 @@ export default class Heap {
 
         while (
             this.hasParent(currentIndex)
-            && !this.pairIsInCorrectOrder(this.parent(currentIndex), this.heapContainer[currentIndex])
+            && !this.pairIsInCorrectOrder(this.parent(currentIndex),
+                this.heapContainer[currentIndex])
         ) {
             this.swap(currentIndex, this.getParentIndex(currentIndex));
             currentIndex = this.getParentIndex(currentIndex);
         }
     }
 
-    heapifyDown(custom) {
+    heapifyDown(customStartIndex) {
         // Compare the parent element to its children and swap parent with the appropriate
         // child (smallest child for MinHeap, largest child for MaxHeap).
         // Do the same for next children after swap.
@@ -112,7 +114,8 @@ export default class Heap {
         while (this.hasLeftChild(currentIndex)) {
             if (
                 this.hasRightChild(currentIndex)
-                && this.pairIsInCorrectOrder(this.rightChild(currentIndex), this.leftChild(currentIndex))
+                && this.pairIsInCorrectOrder(this.rightChild(currentIndex),
+                    this.leftChild(currentIndex))
             ) {
                 nextIndex = this.getRightChildIndex(currentIndex);
             } else {
@@ -159,7 +162,7 @@ export default class Heap {
      * @return {boolean}
      */
     /* istanbul ignore next */
-    pairIsInCorrectOrder(fistElement, secondElement) {
+    pairIsInCorrectOrder(firstElement, secondElement) {
         throw new Error(`
       You have to implement heap pair comparision method
       for ${firstElement} and ${secondElement} values.
@@ -188,7 +191,7 @@ export default class Heap {
     find(item, comparator = this.compare) {
         const foundItemIndices = [];
 
-        this.heapContainer.map((node, index) => {
+        this.heapContainer.forEach((node, index) => {
             if (comparator.equal(item, this.heapContainer[index])) {
                 foundItemIndices.push(index)
             }
@@ -196,8 +199,4 @@ export default class Heap {
 
         return foundItemIndices
     }
-
-
-
 }
-
