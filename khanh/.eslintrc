@@ -10,6 +10,9 @@
             "experimentalObjectRestSpread": true
         }
     },
+    "env": {
+        "jest": true
+    },
     "plugins": [
         "react"
     ],
