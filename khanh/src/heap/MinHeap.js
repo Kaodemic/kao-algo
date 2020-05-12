@@ -1,5 +1,5 @@
 import Heap from "./Heap";
-export default class MaxHeap extends Heap {
+export default class MinHeap extends Heap {
     /**
      * Check if pair of heap elements is in correct order 
      * For MinHeap the firt element must be always smaller or equal
