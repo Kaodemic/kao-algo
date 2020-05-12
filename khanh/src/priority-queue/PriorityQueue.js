@@ -24,9 +24,11 @@ export default class PriorityQueue extends MinHeap {
      */
     add(item, priority = 0) {
         this.priorities.set(item, priority)
+        // this.priorities.push({ item, priority })
         super.add(item)
         return this
     }
+
 
     /**
     * Remove item from priority queue.
@@ -62,6 +64,14 @@ export default class PriorityQueue extends MinHeap {
     }
 
     comparePriority(a, b) {
+        // if (this.priorities.find(x => x.item = a).priority === this.priorities.find(x => x.item = b).priority) {
+        //     return 0
+        // }
+
+        // return this.priorities.find(x => x.item = a).priority
+        //     < this.priorities.find(x => x.item = b).priority ? -1 : 1
+
+
         if (this.priorities.get(a) === this.priorities.get(b)) {
             return 0
         }
