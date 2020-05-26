@@ -30,6 +30,7 @@ export default class Trie {
      */
     deleteWord(word) {
         const depthFirstDelete = (currentNode, charIndex = 0) => {
+            console.log('currentNode=', { "charIndex": charIndex, "CurrentNode_1": currentNode });
             if (charIndex >= word.length) {
                 // Return if we're trying to delete the character that is out of word's scope.
                 return;
@@ -54,7 +55,8 @@ export default class Trie {
             // childNode is deleted only if:
             // - childNode has NO children
             // - childNode.isCompleteWord === false
-            currentNode.removeChild(character);
+            console.log("----------");
+            console.log('removeChild(character)=', { "character": character, "CurrentNode_2": currentNode.removeChild(character) });
         };
 
         // Start depth-first deletion from the head node.
