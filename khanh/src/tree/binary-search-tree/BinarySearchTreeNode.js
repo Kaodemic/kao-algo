@@ -16,7 +16,6 @@ export default class BinarySearchTreeNode extends BinaryTreeNode {
         this.nodevalueComparator = new Comparator(compareFunction)
     }
 
-
     /**
      * @param {*} value
      * @return {BinarySearchTreeNode}
@@ -117,7 +116,9 @@ export default class BinarySearchTreeNode extends BinaryTreeNode {
             } else {
                 nodeToRemove.setValue(undefined)
             }
-        } else if (nodeToRemove.left && nodeToRemove.right) {
+        }
+        else if (
+            nodeToRemove.left && nodeToRemove.right) {
             // Node has two children
             // Find the next biggest value (minimum value in the right branch)
             // and replace current value node with that next biggest value.

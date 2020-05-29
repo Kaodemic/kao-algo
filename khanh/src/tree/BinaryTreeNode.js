@@ -156,20 +156,20 @@ export default class BinaryTreeNode {
     /**
      * @param {BinaryTreeNode} nodeToRemove
      * @return {boolean}
-     */
-    removeChild(nodeToRemove) {
-        if (this.left && this.nodeComparator.equal(this.left, nodeToRemove)) {
-            this.left = null;
-            return true;
-        }
+    //  */
+    // removeChild(nodeToRemove) {
+    //     if (this.left && this.nodeComparator.equal(this.left, nodeToRemove)) {
+    //         this.left = null;
+    //         return true;
+    //     }
 
-        if (this.right && this.nodeComparator.equal(this.right, nodeToRemove)) {
-            this.right = null;
-            return true;
-        }
+    //     if (this.right && this.nodeComparator.equal(this.right, nodeToRemove)) {
+    //         this.right = null;
+    //         return true;
+    //     }
 
-        return false;
-    }
+    //     return false;
+    // }
 
     /**
      * @param {BinaryTreeNode} nodeToReplace
