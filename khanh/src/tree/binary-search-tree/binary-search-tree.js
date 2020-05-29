@@ -1,15 +1,14 @@
 
 import BinarySearchTreeNode from './BinarySearchTreeNode';
-
 export default class BinarySearchTree {
     /**
-    * @param {function} [nodeValueCompareFunction]
-    */
+     * @param {function} [nodeValueCompareFunction]
+     */
     constructor(nodeValueCompareFunction) {
-        this.root = new BinarySearchTreeNode(null, nodeValueCompareFunction)
+        this.root = new BinarySearchTreeNode(null, nodeValueCompareFunction);
 
         // Steal node comparator from the root.
-        this.nodeComparator = this.root.nodeComparator
+        this.nodeComparator = this.root.nodeComparator;
     }
 
     /**
@@ -36,12 +35,10 @@ export default class BinarySearchTree {
         return this.root.remove(value);
     }
 
-
     /**
      * @return {string}
      */
     toString() {
         return this.root.toString();
     }
-
 }
