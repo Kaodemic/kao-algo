@@ -76,6 +76,7 @@ export default class AvlTree extends BinarySearchTree {
             rootNode.setRight(rightNode.left);
         }
 
+
         // Attach rootNode to the left of rightNode.
         console.log('xxxxx', rootNode);
         rightNode.setLeft(rootNode);
