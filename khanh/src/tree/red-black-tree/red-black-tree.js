@@ -10,7 +10,32 @@ const RED_BLACK_TREE_COLORS = {
 // Color property name in meta information of the nodes.
 const COLOR_PROP_NAME = ' color'
 
-export default class RedBlackTree extends BinaryTreeNode {
+export default class RedBlackTree extends BinarySearchTree {
+
+    constructor(rotateMethod = null) {
+        super();
+        this.rotateMethodHistory = []
+        this.rotateMethod = rotateMethod
+    }
+
+    getRotateMethodHistory() {
+        return this.rotateMethodHistory;
+    }
+
+    setRotateMethodHistory(rotateMethod) {
+        this.rotateMethodHistory.push(rotateMethod);
+    }
+
+
+    getRotateMethod() {
+        return this.rotateMethod;
+    }
+
+    setRotateMethod(rotateMethod) {
+        console.info('setRotateMethod', rotateMethod)
+        this.setRotateMethodHistory(rotateMethod);
+        this.rotateMethod = rotateMethod;
+    }
 
     /**
      * @param {*} value
@@ -18,7 +43,6 @@ export default class RedBlackTree extends BinaryTreeNode {
      */
     insert(value) {
         const insertedNode = super.insert(value);
-
         if (this.nodeComparator.equal(insertedNode, this.root)) {
             // Make root alway be black
             this.makeNodeBlack(insertedNode)
@@ -50,7 +74,78 @@ export default class RedBlackTree extends BinaryTreeNode {
         }
 
         // if the parent is black then done, nothing to balance here.
-        if (this.isNodeBlack(node.parent)) { }
+        if (this.isNodeBlack(node.parent)) {
+            return
+        }
+
+        const grandParent = node.parent.parent
+
+        //         [grand]
+        // [uncle]:red          [parent]:red
+        //                            [Node]
+
+        if (node.uncle && this.isNodeRed(node.uncle)) {
+            // If node has red uncle then we need todo RECOLORING
+
+            // Recolor parent and uncle to black
+            //                      [grand]
+            // [uncle]:red->black             [parent]:red->black
+            //                                      [Node]   
+            this.makeNodeBlack(node.uncle)
+            this.makeNodeBlack(node.parent)
+
+            if (!this.nodeComparator.equal(grandParent, this.root)) {
+                // Recolor parent and uncle to black
+                //                      [grand] != ROOT => :red
+                // [uncle]:red->black             [parent]:red->black
+                //  
+                this.makeNodeBlack(node.parent)
+            } else {
+                // if grand-parent is black root don't do anything 
+                // Since root already has two black silbling that we've just recolored
+                return;
+            }
+
+            // Now do further cheking for recolred grand-parent
+            this.balance(grandParent)
+        } else if (!node.uncle || this.isNodeBlack(node.uncle)) {
+            //if node uncle is black or absent then we need to do ROTATIONS
+
+            if (grandParent) {
+                // Grand parent that we will revices after rotation
+                let newGrandParent;
+
+                if (this.nodeComparator.equal(grandParent.left, node.parent)) {
+                    // Left case.
+                    if (this.nodeComparator.equal(node.parent.left, node)) {
+                        // Left-left case.
+                        newGrandParent = this.leftLeftRotation(grandParent)
+                    } else {
+                        // Lelf right case.
+                        newGrandParent = this.leftRightRotation(grandParent)
+                    }
+                } else {
+                    if (this.nodeComparator.equal(node.parent.right, node)) {
+                        // Right-right case.
+                        newGrandParent = this.rightRightRotation(grandParent)
+                    } else {
+                        newGrandParent = this.rightLeftRotation(grandParent)
+                    }
+                }
+
+
+                // Set newGrandParent as a root if it dosn't have parent.
+                if (newGrandParent && newGrandParent.parent == null) {
+                    this.root = newGrandParent
+
+                    //Recolor root in black
+                    this.makeNodeBlack(newGrandParent)
+                }
+
+                // Check if new grand parent don't violate red-black-tree rules.
+                this.balance(newGrandParent)
+            }
+        }
     }
 
     /**
@@ -70,6 +165,7 @@ export default class RedBlackTree extends BinaryTreeNode {
       * @return {BinarySearchTreeNode}
       */
     leftLeftRotation(grandParentNode) {
+        this.setRotateMethod("leftLeftRotation")
         // Memorize the parent of grand-parent node.
         const grandGrandParent = grandParentNode.parent
 
@@ -116,6 +212,7 @@ export default class RedBlackTree extends BinaryTreeNode {
      * @return {BinarySearchTreeNode}
      */
     rightRightRotation(grandParentNode) {
+        this.setRotateMethod("rightRightRotation")
         // Memorize the parent of grand-parent node.
         const grandGrandParent = grandParentNode.parent;
 
@@ -163,6 +260,7 @@ export default class RedBlackTree extends BinaryTreeNode {
      * @return {BinarySearchTreeNode}
      */
     rightLeftRotation(grandParentNode) {
+        this.setRotateMethod("rightLeftRotation")
         // Memorize right and right-left nodes.
         const parentNode = grandParentNode.right;
         const childNode = parentNode.left;
@@ -191,6 +289,8 @@ export default class RedBlackTree extends BinaryTreeNode {
     * @return {BinarySearchTreeNode}
     */
     leftRightRotation(grandParentNode) {
+        //LOG
+        this.setRotateMethod("leftRightRotation")
         // Memorize left and left-right nodes.
         const parentNode = grandParentNode.left;
         const childNode = parentNode.right;
