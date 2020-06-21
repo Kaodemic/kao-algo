@@ -276,6 +276,8 @@ leftRightRotation(grandParentNode)
   return leftLeftRotation
 endLeftRightRotation
 
+```
+
 ## References
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree)
