@@ -9,20 +9,21 @@
 // then select lesser than the smallest one
 // if has then swap
 
-// fn find_min(_array: &[i32]) -> Option<i32> {
-//     let min: &i32 = _array.iter().min()?;
-//     Some(*min)
-// }
+#[allow(dead_code)]
+fn find_min(_array: &[i32]) -> Option<i32> {
+    let min: &i32 = _array.iter().min()?;
+    Some(*min)
+}
 
-// fn find_min_index(_array: &[i32]) -> Option<usize> {
-//     let index = _array.iter().enumerate().min_by(|a,b| a.1.cmp(b.1));
+#[allow(dead_code)]
+fn find_min_index(_array: &[i32]) -> Option<usize> {
+    let index = _array.iter().enumerate().min_by(|a,b| a.1.cmp(b.1));
 
-//     match index {
-//         Some((i,_min_value)) => Some(i),
-//         None => panic!("Empty")
-//     }
-// }
-
+    match index {
+        Some((i,_min_value)) => Some(i),
+        None => panic!("Empty")
+    }
+}
 
 pub fn sort(array: &mut[i32]) {
     let len = array.len();
