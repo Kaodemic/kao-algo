@@ -1,3 +1,5 @@
+mod selection_sort;
+
 fn main() {
-    println!("Hello, world!");
+    selection_sort::sort();
 }

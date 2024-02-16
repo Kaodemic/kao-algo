@@ -10,6 +10,6 @@
 // then select lesser than the smallest one
 // if has then swap
 
-fn main() {
-    println!("Hello World");
+pub fn sort() {
+    println!("Hello from my_function!");
 }
