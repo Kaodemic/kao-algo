@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "sorting"
+name = "kao-algo"
 version = "0.1.0"
