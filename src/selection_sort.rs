@@ -25,6 +25,7 @@ fn find_min_index(_array: &[i32]) -> Option<usize> {
     }
 }
 
+#[allow(dead_code)]
 pub fn sort(array: &mut[i32]) {
     let len = array.len();
     for i in 0..len {
