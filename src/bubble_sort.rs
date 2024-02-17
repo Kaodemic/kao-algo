@@ -17,7 +17,7 @@
 // is that require additional memory or not?
 // is that ok with large data sets
 // How much is called is large datasets
-
+#[allow(dead_code)]
 pub fn sort(array: &mut [i32]) {
     let len: usize = array.len();
     for _i in 0..len {
