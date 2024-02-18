@@ -1,4 +1,5 @@
 // vec![1,3,9,5,2,7];
+#[allow(dead_code)]
 pub fn sort(array: &mut [i32]) {
     let len: usize = array.len();
     for i in 0..len {
