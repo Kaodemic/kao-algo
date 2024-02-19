@@ -5,8 +5,11 @@ def bsearch(array, search):
        
 
         while l <= r:
-            mid = l + (r-1) // 2
-
+            mid = (l + (r-1)) // 2
+            
+            if l == r:
+                return mid+1
+            
             if array[mid] == search:
                 return mid
             elif array[mid] < search:
@@ -24,7 +27,7 @@ if __name__ == '__main__':
 
     assert arr == [1,2,3,4,10,40], "The array does not match the expected values"
 
-    result = bsearch(arr, 4);
+    result = bsearch(arr, 40);
     if result != -1:
         print("Element is presnt at index", result)
     else: 
