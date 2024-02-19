@@ -17,7 +17,7 @@ def bsearch(array, search):
         return -1
 
 # Driver
-## Sort array first cost O(n)
+## Sort array first cost O(log n)
 if __name__ == '__main__':
     arr = [2,3,4,1,10,40]
     arr.sort();
