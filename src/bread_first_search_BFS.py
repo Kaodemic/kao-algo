@@ -17,7 +17,9 @@ class Graph:
         queue.append(s)
         visited[s] = True
 
-        while queue:
+       
+
+        while len(queue):
             s = queue.pop(0)
             print(s, end=" ")
             for i in self.graph[s]:
@@ -25,7 +27,9 @@ class Graph:
                     queue.append(i)
                     visited[i] = True
 
-
+        if(len(queue)<1):
+            print("\n End!!")
+        
 # Driver code
 if __name__ == '__main__':
 
