@@ -37,3 +37,16 @@ console.log(dailyTemperatures(bigFile));
 // The stack ensures that we only need to iterate through the array once, significantly improving performance for large arrays. The time complexity is now linear, O(n)
 // , where n
 //  is the length of the temperatures array. This should be much more efficient for large datasets.
+
+var dailyTemperatures = function(temperatures) {
+    var result = new Array(temperatures.length).fill(0);
+    var stack = []; // this will store indices
+    for (var i = 0; i < temperatures.length; i++) {
+        while (stack.length !== 0 && temperatures[i] > temperatures[stack[stack.length - 1]]) {
+            var idx = stack.pop();
+            result[idx] = i - idx;
+        }
+        stack.push(i);
+    }
+    return result;
+};
