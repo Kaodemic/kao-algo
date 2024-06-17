@@ -22,7 +22,6 @@ class Trie {
             node = node.children[char];
         }
         node.isEndOfWord = true;
-        return null;
     }
 
     search(word) {
@@ -33,21 +32,23 @@ class Trie {
             }
             node = node.children[char];
         }
-        return true;
+        return node.isEndOfWord;
     }
 
-    startsWith(word) {
-        let node = this.root;
+    startsWith(prefix) {
+        let current = this.root;
         for (const char of word) {
-            if (!node.children[char]) {
+            if (!current.children[char]) {
                 return false;
             }
-            node = node.children[char];
+            current = current.children[char];
         }
         return true;
     }
 
 }
+
+
 let commands = ["Trie","insert","search","search","startsWith","insert","search"]
 let input = [[],["apple"],["apple"],["app"],["app"],["app"],["app"]]
 
