@@ -76,7 +76,7 @@ const compareArrays = (a, b) =>
     a.length === b.length &&
     a.every((element, index) => element === b[index]);
 
-measure(countBitsFastest(1))
+measure(countBitsFastest(4))
 
 // The execution time of countBitsFastest is lesser than countBits primarily due to the efficiency of the bit counting method used.
 
