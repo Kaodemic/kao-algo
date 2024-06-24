@@ -68,6 +68,7 @@ function main() {
 */
 
 
+
 function aBetterVersionMain() {
     var RecentCounter = function () {
         this.range = [];
@@ -83,22 +84,29 @@ function aBetterVersionMain() {
         // Add the new timestamp to the range
         this.range.push(t)
 
-        while (this.lastValidIndex + 1 < this.range.length
-            && this.range[this.lastValidIndex + 1] < t - 3000) {
-            this.lastValidIndex++;
-        }
-
         const count = this.range.length - this.lastValidIndex - 1;
         return count;
     }
 
-    var obj = new RecentCounter()
-    console.log(obj.ping(1));
-    console.log(obj.ping(100));
-    console.log(obj.ping(102));
-    console.log(obj.ping(3001));
-    console.log(obj.ping(3002));
-    console.log(obj.ping(3004));
-    console.log(obj.ping(3005));
+    var counter = new RecentCounter()
+    counter.ping(1000); // Adds 1000 to the range
+    counter.ping(2000); // Adds 2000 to the range
+    counter.ping(3000); // Adds 3000 to the range
+    counter.ping(4000); // Removes 1000 (outdated) and adds 4000 to the range
 }
+var startTime = performance.now();
 aBetterVersionMain()
+var endTime = performance.now();
+console.log(`Call to doSomething took ${endTime - startTime} milliseconds`);
+
+const formatMemoryUsage = (data) => `${Math.round(data / 1024 / 1024 * 100) / 100} MB`;
+
+// Get memory usage
+const memoryData = process.memoryUsage();
+const memoryUsage = {
+    rss: `${formatMemoryUsage(memoryData.rss)} -> Resident Set Size (total memory allocated for the process execution)`,
+    heapTotal: `${formatMemoryUsage(memoryData.heapTotal)} -> Total heap size`,
+    heapUsed: `${formatMemoryUsage(memoryData.heapUsed)} -> Heap used by the application`
+};
+
+console.log(memoryUsage);
