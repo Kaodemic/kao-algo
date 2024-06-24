@@ -44,7 +44,7 @@ RecentCounter.prototype.ping = function (t) {
  * var param_1 = obj.ping(t)
  */
 
-function main(){
+function main() {
     var obj = new RecentCounter()
     console.log(obj.ping(1));
     console.log(obj.ping(100));
@@ -83,7 +83,8 @@ function aBetterVersionMain() {
         // Add the new timestamp to the range
         this.range.push(t)
 
-        while (this.lastValidIndex + 1 < this.range.length && this.range[this.lastValidIndex + 1] < t - 3000) {
+        while (this.lastValidIndex + 1 < this.range.length
+            && this.range[this.lastValidIndex + 1] < t - 3000) {
             this.lastValidIndex++;
         }
 
@@ -94,6 +95,7 @@ function aBetterVersionMain() {
     var obj = new RecentCounter()
     console.log(obj.ping(1));
     console.log(obj.ping(100));
+    console.log(obj.ping(102));
     console.log(obj.ping(3001));
     console.log(obj.ping(3002));
     console.log(obj.ping(3004));
