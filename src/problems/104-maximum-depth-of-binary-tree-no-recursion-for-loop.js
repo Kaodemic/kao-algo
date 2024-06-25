@@ -55,5 +55,6 @@ bst.insert(4);
 bst.insert(6);
 bst.insert(8);
 
+console.log(bst)
 console.log("In-order traversal:");
 bst.inOrderTraversal(); // Output: 2 3 4 5 6 7 8
