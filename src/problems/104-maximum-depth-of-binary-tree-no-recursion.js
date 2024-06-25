@@ -14,13 +14,13 @@ class BinarySearchTree {
 
     insert(data) {
         const newNode = new TreeNode(data)
-        if (!this.root) {
+        if (this.root === null) {
             this.root = newNode;
         } else {
             this.insertNode(this.root, newNode)
         }
     }
-
+    
     insertNode(node, newNode) {
         if (newNode.data < node.data) {
             if (!node.left) {
@@ -32,27 +32,18 @@ class BinarySearchTree {
             if (!node.right) {
                 node.right = newNode;
             } else {
-                this.insertNode(node.right, newNode)
+                this.insertNode(node.left, newNode)
             }
         }
     }
-
-    // Convert BST to JSON object
-    toJSON() {
-        return JSON.stringify(this.root, null, 2);
-    }
 }
 
-var bst = new BinarySearchTree()
+var treeNode = new TreeNode(root)
 
 
-bst.insert(5);
-bst.insert(3);
-bst.insert(7);
-bst.insert(2);
-bst.insert(4);
-bst.insert(6);
-bst.insert(8);
+treeNode.insert(1)
+treeNode.insert(2)
+treeNode.insert(2)
+treeNode.insert(4)
 
-console.log("BST as JSON:");
-console.log(bst.toJSON());
+treeNode.print()
