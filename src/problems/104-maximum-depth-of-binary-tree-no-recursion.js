@@ -1,49 +1,35 @@
-
 class TreeNode {
-    constructor(data) {
-        this.data = data
-        this.left = null
-        this.right = null
-    }
-
-}
-class BinarySearchTree {
-    constructor() {
-        this.root = null;
-    }
-
-    insert(data) {
-        const newNode = new TreeNode(data)
-        if (this.root === null) {
-            this.root = newNode;
-        } else {
-            this.insertNode(this.root, newNode)
-        }
-    }
-    
-    insertNode(node, newNode) {
-        if (newNode.data < node.data) {
-            if (!node.left) {
-                node.left = newNode;
-            } else {
-                this.insertNode(node.left, newNode)
-            }
-        } else {
-            if (!node.right) {
-                node.right = newNode;
-            } else {
-                this.insertNode(node.left, newNode)
-            }
-        }
+    constructor(val, left = null, right = null) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
     }
 }
 
-var treeNode = new TreeNode(root)
+function* inOrderTraversal(root) {
+    const stack = [];
+    let current = root;
 
+    while (current || stack.length > 0) {
+        while (current) {
+            stack.push(current);
+            current = current.left;
+        }
 
-treeNode.insert(1)
-treeNode.insert(2)
-treeNode.insert(2)
-treeNode.insert(4)
+        current = stack.pop();
+        yield current.val;
+        current = current.right;
+    }
+}
 
-treeNode.print()
+// Example usage:
+const bst = new TreeNode(5);
+bst.left = new TreeNode(3);
+bst.right = new TreeNode(7);
+bst.left.left = new TreeNode(2);
+bst.left.right = new TreeNode(4);
+bst.right.left = new TreeNode(6);
+bst.right.right = new TreeNode(8);
+
+console.log("In-order traversal without recursion:");
+console.log(...inOrderTraversal(bst)); // Output: 2 3 4 5 6 7 8
