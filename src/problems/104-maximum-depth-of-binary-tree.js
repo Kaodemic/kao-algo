@@ -1,52 +1,39 @@
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
 
-class Node {
-    constructor(prev, value, left, right) {
-        this.prev = prev
-        this.value = value
-        this.left = left
-        this.right = right
+class TreeNode {
+    constructor(data) {
+        this.data = data
+        this.left = null
+        this.right = null
     }
 
 }
-class TreeNode {
-    constructor(node) {
-        this.root = node;
-        this.lastestPointer = undefined;
+class BinarySearchTree {
+    constructor() {
+        this.root = null;
     }
-    add(value) {
-        let node = this.root;
-        let newNode = new Node(node, value, null);
-        if (node.value > value) {
-            while (!node.lefl) {
-                if (!node.lefl){
-                    node.lefl=newNode;
-                    node=node.lefl
-                }else{
-                    node=node.lefl
-                }
+
+    insert(data) {
+        const newNode = new Node(data)
+        if (this.root === null) {
+            this.root = newNode;
+        } else {
+            this.insertNode(this.root, newNode)
+        }
+    }
+    
+    insertNode(node, newNode) {
+        if (newNode.data < node.data) {
+            if (!node.left) {
+                node.left = newNode;
+            } else {
+                this.insertNode(node.left, newNode)
             }
-        }
-
-    }
-
-    print() {
-        let node = this.root;
-        while (node.right != null) {
-            console.log(node)
-            node = node.right;
-        }
-
-        while (node.lefl != null) {
-            console.log(node)
-            node = node.lefl;
+        } else {
+            if (!node.right) {
+                node.right = newNode;
+            } else {
+                this.insertNode(node.left, newNode)
+            }
         }
     }
 }
@@ -62,9 +49,9 @@ var root = new Node(null, 2, null, null)
 var treeNode = new TreeNode(root)
 
 
-treeNode.add(1)
-treeNode.add(2)
-treeNode.add(2)
-treeNode.add(4)
+treeNode.insert(1)
+treeNode.insert(2)
+treeNode.insert(2)
+treeNode.insert(4)
 
 treeNode.print()
