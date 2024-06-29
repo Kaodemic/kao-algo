@@ -18,20 +18,51 @@ class Node {
 
 class LinkedList {
     constructor() {
-        this.head= new Node('root')
+        this.head = null;
+        this.array = []
+        this.value = [];
     }
     insert(data) {
-        this.head = new Node(data, this.head);
-      }
-    print(){
-       return this.head;
+        if (!this.head) {
+            const node = new Node(data, null);
+            this.head = node;
+        } else {
+            let node = this.head;
+            this.insertNode(node, new Node(data, null))
+        }
     }
-   
+    insertNode(node, newNode) {
+        if (node.next) {
+            this.insertNode(node.next, newNode)
+        } else {
+            node.next = newNode;
+        }
+    }
+    print(node) {
+        this.value.push(node.value)
+        if (node.next) {
+            this.print(node.next)
+        }
+    }
+    pushToArray(node) {
+        if (!node) return this.array
+        if (node.value) {
+            this.array.push(node.value)
+        }
+        this.pushToArray(node.next)
+    }
+    getArrayReverse() {
+        return this.array.reverse()
+    }
 }
 
 
 const list = new LinkedList();
-list.insert(1)
-list.insert(2)
-list.insert(3)
-list.print()
+Array.from({ length: 10000 }, () => Math.floor(Math.random() * 10000)).forEach(element => {
+    list.insert(element)
+});
+
+list.print(list.head)
+list.pushToArray(list.head)
+console.log(list.getArrayReverse())
+console.log(list.value)
