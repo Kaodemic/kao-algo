@@ -9,72 +9,71 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
+
 class Node {
-    constructor(value, next) {
+    constructor(value, next, prev) {
         this.next = next || null
         this.value = value
+        this.prev = prev;
     }
 }
 
 class LinkedList {
     constructor() {
         this.head = null;
+        this.tail = null;
         this.array = []
         this.value = [];
+        this.result = [];
     }
     insert(data) {
         if (!this.head) {
-            const node = new Node(data, null);
+            const node = new Node(data, null, null);
             this.head = node;
         } else {
             let node = this.head;
-            this.insertNode(node, new Node(data, null))
+            this.insertNode(node, new Node(data, null, node))
         }
     }
     insertNode(node, newNode) {
         if (node.next) {
+            this.tail = newNode
             this.insertNode(node.next, newNode)
         } else {
             node.next = newNode;
+            newNode.prev = node;
+
         }
     }
     print(node) {
-        this.value.push(node.value)
+        console.log(node)
         if (node.next) {
             this.print(node.next)
         }
     }
-    pushToArray(node) {
-        if (!node) return this.array
-        if (node.value) {
-            this.array.push(node.value)
+    printReverse(node) {
+        this.result.push(node.value)
+        if (node.prev) {
+            this.printReverse(node.prev)
+        }else{
+            return this.result
         }
-        this.pushToArray(node.next)
-    }
-    getArrayReverse() {
-        return this.array.reverse()
     }
 }
 
-
-
-
+var input = 10000;
 function main() {
-    const list = new LinkedList();
-    Array.from({ length: 10000 }, () => Math.floor(Math.random() * 10000)).forEach(element => {
+    Array.from({ length: input }, () => Math.floor(Math.random() * input)).forEach(element => {
         list.insert(element)
     });
-
-    list.print(list.head)
-    list.pushToArray(list.head)
-    console.log(list.getArrayReverse())
-    console.log(list.value)
+    list.printReverse(list.tail);// list.print(list.head)
+    console.log(list.result)
 }
-
 
 var startTime = performance.now();
 const list = new LinkedList();
 main()
+
 var endTime = performance.now();
 console.log(`Call to doSomething took ${endTime - startTime} milliseconds`);
 
