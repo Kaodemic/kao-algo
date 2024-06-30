@@ -27,10 +27,9 @@ var reverseLinkedList = function(linkedlist) {
   }
   return previous;   // Change the list head !!!
 }
-linkedlist = reverseLinkedList(linkedlist);
 
 
-const list = {
+const linkedlist = {
   head: {
     value: 6,
     next: {
@@ -46,5 +45,4 @@ const list = {
   }
 };
 
-console.log(reverseList(list.head))
-
+linkedlist = reverseLinkedList(linkedlist);
