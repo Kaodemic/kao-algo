@@ -19,8 +19,8 @@ class Node {
 }
 
 class LinkedList {
-    constructor() {
-        this.head = null;
+    constructor(head) {
+        this.head = head;
         this.tail = null;
         this.array = []
         this.value = [];
@@ -46,8 +46,13 @@ class LinkedList {
         }
     }
     print(node) {
-        console.log(node)
+        if(!node.next){
+            this.result.push(node.value)
+            return this.result.reverse()
+        }
         if (node.next) {
+            //this.print(node.next)
+            this.result.push(node.value)
             this.print(node.next)
         }
     }
@@ -61,18 +66,27 @@ class LinkedList {
     }
 }
 
-var input = 10000;
+var input = 10;
+
+
 function main() {
     Array.from({ length: input }, () => Math.floor(Math.random() * input)).forEach(element => {
         list.insert(element)
     });
     list.printReverse(list.tail);// list.print(list.head)
-    console.log(list.result)
 }
 
+const listInput = new LinkedList();
+[1,2,3,4,5].forEach(element => listInput.insert(element)) 
+
+var reverseList = function(head) {
+    const list = new LinkedList(head);
+    list.print(head);
+};
+
+//--------------------
 var startTime = performance.now();
-const list = new LinkedList();
-main()
+reverseList(listInput.head)
 
 var endTime = performance.now();
 console.log(`Call to doSomething took ${endTime - startTime} milliseconds`);
