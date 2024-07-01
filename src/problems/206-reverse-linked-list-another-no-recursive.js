@@ -11,21 +11,18 @@
  */
 
 // reverse a linked list  
-var reverseLinkedList = function(linkedlist) {
-  var node = linkedlist;
-  var previous = null;
+var reverseLinkedList = function({head}) {
+  let prev = null;
+  let current = head;
 
-  while(node) {
-    // save next or you lose it!!!
-    var save = node.next;
-    // reverse pointer
-    node.next = previous;
-    // increment previous to current node
-    previous = node;
-    // increment node to next node or null at end of list
-    node = save;
+  while (current !== null) {
+    const nextNode = current.next;
+    current.next = prev;
+    prev = current;
+    current = nextNode;
   }
-  return previous;   // Change the list head !!!
+
+  return prev;
 }
 
 
@@ -45,4 +42,5 @@ const linkedlist = {
   }
 };
 
-linkedlist = reverseLinkedList(linkedlist);
+var rlinkedlist = reverseLinkedList(linkedlist);
+console.log(rlinkedlist)
