@@ -29,13 +29,14 @@ const list = {
       next: {
         value: 12,
         next: {
-          value: 3,
+          value: 13,
           next: null
         }
       }
     }
   }
 };
+
 
 console.log(reverseList(list.head))
 
